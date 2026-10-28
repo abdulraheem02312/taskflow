@@ -1,0 +1,26 @@
+# Render Blueprint: one free Node web service for Taskflow.
+# Secrets (sync: false) are typed into the Render dashboard, never committed here.
+services:
+  - type: web
+    name: taskflow
+    runtime: node
+    plan: free
+    region: singapore # closest to the Supabase database (Seoul)
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
