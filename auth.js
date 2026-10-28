@@ -21,7 +21,8 @@ export async function createSession(res, userId) {
   const maxAge = SESSION_DAYS * 24 * 60 * 60 * 1000;
   await db.prepare('INSERT INTO sessions (token, user_id, expires_at) VALUES (?, ?, ?)')
     .run(token, userId, Date.now() + maxAge);
-  res.cookie('session', token, { httpOnly: true, sameSite: 'lax', maxAge });
+  // Live site runs on https, so the cookie is never sent over plain http there
+  res.cookie('session', token, { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production', maxAge });
 }
 
 export async function destroySession(req, res) {

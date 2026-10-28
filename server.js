@@ -17,6 +17,8 @@ const PORT = process.env.PORT || 3000;
 const GOOGLE_CLIENT_ID = (process.env.GOOGLE_CLIENT_ID || '').trim();
 const googleClient = new OAuth2Client();
 
+// Hosting (Hostinger) puts a proxy in front: trust its X-Forwarded-For so req.ip is the visitor, not the proxy
+app.set('trust proxy', 1);
 app.use(express.json());
 
 // Clean URLs: /login.html -> /login
