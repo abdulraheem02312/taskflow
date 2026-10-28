@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form | Taskflow</title>
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <meta name="theme-color" content="#050505">
+  <!-- Apply the saved theme before the first paint, so the page never flashes the wrong colors -->
+  <script>(function(){var p="dark";try{p=localStorage.getItem("theme")||"dark"}catch(e){}var t=p==="system"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):(p==="light"?"light":"dark");document.documentElement.dataset.theme=t;})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card form-card">
+    <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+    <h1 id="form-title">Loading...</h1>
+    <p class="form-desc" id="form-desc"></p>
+    <form id="public-form" hidden>
+      <label>Your name <input name="name" required maxlength="80" autocomplete="name"></label>
+      <label>Email (optional) <input name="email" type="email" maxlength="120" autocomplete="email"></label>
+      <label>Title <input name="title" required maxlength="200" placeholder="A short summary"></label>
+      <label>Details <textarea name="details" rows="5" maxlength="4000" placeholder="Anything else we should know?"></textarea></label>
+      <!-- Hidden from people; bots fill it in -->
+      <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+      <p class="form-error" id="form-error"></p>
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <div class="form-done" id="form-done" hidden>
+      <div class="auth-done-icon ok">✓</div>
+      <p>Thanks! Your request was sent.</p>
+      <button class="btn btn-ghost" type="button" id="form-again">Send another</button>
+    </div>
+    <p class="auth-switch">Made with <a href="/">Taskflow</a></p>
+  </main>
+  <script src="/js/theme.js"></script>
+  <script>
+    const token = location.pathname.split('/').pop();
+    const form = document.getElementById('public-form');
+    const error = document.getElementById('form-error');
+    fetch(`/api/forms/${encodeURIComponent(token)}`).then((r) => r.json().then((d) => ({ ok: r.ok, d }))).then(({ ok, d }) => {
+      document.getElementById('form-title').textContent = ok ? d.title : 'Form not available';
+      document.getElementById('form-desc').textContent = ok ? d.description || `Send a request to ${d.project_name}.` : d.error;
+      document.title = `${ok ? d.title : 'Form'} | Taskflow`;
+      form.hidden = !ok;
+    });
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      error.textContent = '';
+      const button = form.querySelector('button');
+      button.disabled = true;
+      const res = await fetch(`/api/forms/${encodeURIComponent(token)}`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))),
+      });
+      const data = await res.json();
+      button.disabled = false;
+      if (!res.ok) { error.textContent = data.error || 'Something went wrong'; return; }
+      form.reset();
+      form.hidden = true;
+      document.getElementById('form-done').hidden = false;
+    });
+    document.getElementById('form-again').addEventListener('click', () => {
+      document.getElementById('form-done').hidden = true;
+      form.hidden = false;
+    });
+  </script>
+</body>
+</html>

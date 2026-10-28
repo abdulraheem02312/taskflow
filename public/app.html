@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taskflow</title>
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#050505">
+  <!-- Apply the saved theme before the first paint, so the page never flashes the wrong colors -->
+  <script>(function(){var p="dark";try{p=localStorage.getItem("theme")||"dark"}catch(e){}var t=p==="system"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):(p==="light"?"light":"dark");document.documentElement.dataset.theme=t;})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="app-page">
+  <!-- Top bar: sidebar toggle, Create, Search and the account menu -->
+  <header class="topbar">
+    <button class="icon-btn topbar-menu" id="sidebar-toggle" type="button" title="Show or hide the sidebar" aria-label="Show or hide the sidebar">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5.5h14M3 10h14M3 14.5h14"/></svg>
+    </button>
+    <a class="logo topbar-logo" href="/app"><img class="logo-mark" src="/img/logo.png" alt="" width="24" height="24"><span>Taskflow</span></a>
+    <button class="create-btn" id="create-btn" type="button" aria-haspopup="menu" aria-expanded="false">
+      <span class="create-plus" aria-hidden="true">+</span><span class="create-label">Create</span>
+    </button>
+    <button class="topbar-search" id="open-search" type="button">
+      <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+      <span>Search tasks and projects</span>
+      <kbd>Ctrl K</kbd>
+    </button>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Switch between light and dark" title="Light / dark"><svg class="ti-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.5"/><path d="M10 2.5v1.8M10 15.7v1.8M2.5 10h1.8M15.7 10h1.8M4.7 4.7l1.3 1.3M14 14l1.3 1.3M4.7 15.3L6 14M14 6l1.3-1.3"/></svg><svg class="ti-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.5A6.5 6.5 0 0 1 7.5 4a6.5 6.5 0 1 0 8.5 8.5z"/></svg></button>
+    <button class="user-btn" id="user-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Account">
+      <span class="avatar" id="user-avatar"></span>
+    </button>
+  </header>
+
+  <div class="app-body">
+  <aside class="sidebar" id="sidebar">
+    <nav class="side-nav">
+      <a class="side-link" href="/app" data-page="home">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 9.5L10 4l7 5.5V16a1 1 0 0 1-1 1h-3.5v-4.5h-5V17H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Home</span>
+      </a>
+      <a class="side-link" href="/app/my-tasks" data-page="my-tasks">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M7 10.2l2 2 4-4.4"/></svg>
+        <span>My tasks</span>
+        <span class="side-count" id="my-tasks-count"></span>
+      </a>
+      <a class="side-link" href="/app/inbox" data-page="inbox">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 11l2.2-6.2A1.2 1.2 0 0 1 6.3 4h7.4a1.2 1.2 0 0 1 1.1.8L17 11v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M3 11h4l1 2h4l1-2h4"/></svg>
+        <span>Inbox</span>
+        <span class="side-badge" id="inbox-count" hidden></span>
+      </a>
+    </nav>
+
+    <nav class="side-nav">
+      <a class="side-link" href="/app/projects" data-page="projects">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h3.2l1.6 1.8h6.2A1.5 1.5 0 0 1 17 8.3v6.2a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5z"/></svg>
+        <span>Projects</span>
+      </a>
+      <a class="side-link" href="/app/portfolios" data-page="portfolios">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="10" rx="1.5"/><path d="M7.5 6V4.5h5V6M3 10.5h14"/></svg>
+        <span>Portfolios</span>
+      </a>
+      <a class="side-link" href="/app/goals" data-page="goals">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/><circle cx="10" cy="10" r=".6"/></svg>
+        <span>Goals</span>
+      </a>
+      <a class="side-link" href="/app/reporting" data-page="reporting">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16V9M8.7 16V5M13.3 16v-5M18 16H2"/></svg>
+        <span>Reporting</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-section">
+      <div id="favorites-group" hidden>
+        <div class="sidebar-heading"><span>Favorites</span></div>
+        <ul class="project-list" id="favorite-list"></ul>
+      </div>
+      <div class="sidebar-heading">
+        <span>My projects</span>
+        <button class="icon-btn" id="new-project-btn" type="button" title="New project" aria-label="New project">+</button>
+      </div>
+      <ul class="project-list" id="project-list"></ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-ghost invite-btn" id="invite-btn" type="button">
+        <svg class="btn-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="7" r="3"/><path d="M2.5 16a5.5 5.5 0 0 1 11 0M15 6v6M12 9h6"/></svg>
+        Invite teammates
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- Home -->
+    <section class="page" id="home-page" hidden>
+      <header class="page-header">
+        <div class="page-heading">
+          <div class="page-date" id="home-date"></div>
+          <h1 id="home-greeting">Welcome</h1>
+        </div>
+        <div class="home-summary" id="home-summary"></div>
+        <button class="btn btn-ghost page-action" id="home-customize" type="button">
+          <svg class="btn-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 6h7M15 6h1M4 14h1M9 14h7"/><circle cx="13" cy="6" r="2"/><circle cx="7" cy="14" r="2"/></svg>
+          <span class="btn-label">Add widgets</span>
+        </button>
+      </header>
+      <div class="page-body">
+        <div class="home-widgets" id="home-widgets"></div>
+      </div>
+    </section>
+
+    <!-- Portfolios: list, and one portfolio -->
+    <section class="page" id="portfolios-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="6" width="14" height="10" rx="1.5"/><path d="M7.5 6V4.5h5V6M3 10.5h14"/></svg></span>
+        <div class="page-heading"><h1>Portfolios</h1><div class="page-sub">Watch a group of projects in one place</div></div>
+        <button class="btn btn-primary page-action" id="portfolios-new" type="button">+ New portfolio</button>
+      </header>
+      <div class="page-body"><div class="projects-browse" id="portfolios-body"></div></div>
+    </section>
+
+    <section class="page" id="portfolio-page" hidden>
+      <header class="page-header">
+        <span class="project-color" id="portfolio-color"></span>
+        <div class="page-heading"><h1 id="portfolio-title"></h1><div class="page-sub" id="portfolio-sub"></div></div>
+        <button class="btn btn-primary page-action" id="portfolio-add" type="button">+ Add project</button>
+        <button class="icon-btn project-more" id="portfolio-more" type="button" title="Portfolio actions" aria-label="Portfolio actions" aria-haspopup="menu">⋯</button>
+      </header>
+      <div class="page-body" id="portfolio-body"></div>
+    </section>
+
+    <!-- Goals -->
+    <section class="page" id="goals-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><circle cx="10" cy="10" r="3.5"/><circle cx="10" cy="10" r=".6"/></svg></span>
+        <div class="page-heading"><h1>Goals</h1><div class="page-sub" id="goals-sub"></div></div>
+        <button class="btn btn-primary page-action" id="goals-new" type="button">+ New goal</button>
+      </header>
+      <div class="page-body"><div class="goal-list" id="goals-body"></div></div>
+    </section>
+
+    <!-- Reporting: charts across every project -->
+    <section class="page" id="reporting-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16V9M8.7 16V5M13.3 16v-5M18 16H2"/></svg></span>
+        <div class="page-heading">
+          <h1>Reporting</h1>
+          <div class="page-sub" id="reporting-sub"></div>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="report-filters">
+          <span>Time range</span>
+          <div class="seg" id="report-range" role="group" aria-label="Time range">
+            <button class="seg-btn" data-weeks="4" type="button">Last 4 weeks</button>
+            <button class="seg-btn" data-weeks="12" type="button">Last 12 weeks</button>
+            <button class="seg-btn" data-weeks="26" type="button">Last 6 months</button>
+          </div>
+        </div>
+        <div id="reporting-body"></div>
+      </div>
+    </section>
+
+    <!-- Projects: browse all projects -->
+    <section class="page" id="projects-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h3.2l1.6 1.8h6.2A1.5 1.5 0 0 1 17 8.3v6.2a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5z"/></svg></span>
+        <div class="page-heading">
+          <h1>Projects</h1>
+          <div class="page-sub" id="projects-sub"></div>
+        </div>
+        <button class="btn btn-primary page-action" id="projects-new" type="button">+ New project</button>
+      </header>
+      <div class="page-body">
+        <div class="proj-stats" id="projects-stats"></div>
+        <div class="projects-toolbar">
+          <div class="search-box">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+            <input type="search" id="projects-search" placeholder="Find a project" autocomplete="off" aria-label="Find a project">
+          </div>
+          <div class="seg" id="projects-filter" role="tablist" aria-label="Show">
+            <button class="seg-btn" data-filter="all" role="tab" type="button">All</button>
+            <button class="seg-btn" data-filter="owned" role="tab" type="button">Owned by me</button>
+            <button class="seg-btn" data-filter="shared" role="tab" type="button">Shared with me</button>
+            <button class="seg-btn" data-filter="favorites" role="tab" type="button">★ Favorites</button>
+            <button class="seg-btn" data-filter="archived" role="tab" type="button">Archived</button>
+          </div>
+          <div class="projects-tools">
+            <select id="projects-sort" aria-label="Sort projects">
+              <option value="recent">Recent activity</option>
+              <option value="name">Name (A to Z)</option>
+              <option value="progress">Most progress</option>
+              <option value="open">Most open tasks</option>
+              <option value="due">Due date</option>
+            </select>
+            <div class="seg" id="projects-layout" aria-label="Layout">
+              <button class="seg-btn" data-layout="grid" type="button" title="Grid">▦ Grid</button>
+              <button class="seg-btn" data-layout="list" type="button" title="List">☰ List</button>
+            </div>
+          </div>
+        </div>
+        <div class="projects-browse" id="projects-browse"></div>
+      </div>
+    </section>
+
+    <!-- My Tasks -->
+    <section class="page" id="mytasks-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M7 10.2l2 2 4-4.4"/></svg></span>
+        <div class="page-heading">
+          <h1>My Tasks</h1>
+          <div class="page-sub" id="mytasks-sub"></div>
+        </div>
+        <div class="seg mt-views" id="mt-views" role="group" aria-label="View">
+          <button class="seg-btn" data-view="list" type="button">List</button>
+          <button class="seg-btn" data-view="board" type="button">Board</button>
+        </div>
+        <button class="btn btn-primary" id="mt-add" type="button">+ Add task</button>
+      </header>
+      <div class="page-body" id="mytasks-body"></div>
+    </section>
+
+    <!-- Inbox -->
+    <section class="page" id="inbox-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 11l2.2-6.2A1.2 1.2 0 0 1 6.3 4h7.4a1.2 1.2 0 0 1 1.1.8L17 11v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M3 11h4l1 2h4l1-2h4"/></svg></span>
+        <div class="page-heading">
+          <h1>Inbox</h1>
+          <div class="page-sub" id="inbox-sub"></div>
+        </div>
+        <button class="btn btn-ghost page-action" id="mark-all-read" type="button">Mark all as read</button>
+        <button class="btn btn-ghost" id="archive-all" type="button">Archive all</button>
+      </header>
+      <div class="inbox-bar">
+        <nav class="inbox-tabs" id="inbox-tabs" aria-label="Inbox">
+          <button class="inbox-tab" data-tab="activity" type="button">Activity</button>
+          <button class="inbox-tab" data-tab="mentions" type="button">@Mentioned</button>
+          <button class="inbox-tab" data-tab="bookmarks" type="button">Bookmarks</button>
+          <button class="inbox-tab" data-tab="archive" type="button">Archive</button>
+        </nav>
+        <label class="switch-row inbox-unread"><span class="switch"><input type="checkbox" id="inbox-unread-only"><span class="switch-track"></span></span><span>Unread only</span></label>
+      </div>
+      <div class="page-body">
+        <div class="inbox-list" id="inbox-list"></div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="page" id="settings-page" hidden>
+      <header class="page-header">
+        <span class="page-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="gear" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg></span>
+        <div class="page-heading">
+          <h1>Settings</h1>
+          <div class="page-sub">Your profile, password and account</div>
+        </div>
+      </header>
+      <div class="page-body">
+        <div class="settings">
+          <section class="settings-card">
+            <div class="settings-card-head">
+              <h2>Profile</h2>
+              <p>How your teammates see you.</p>
+            </div>
+            <form id="profile-form" class="settings-form">
+              <div class="profile-row">
+                <span id="settings-avatar"></span>
+                <div class="profile-info">
+                  <div class="profile-name" id="settings-name-preview"></div>
+                  <div class="profile-meta" id="settings-since"></div>
+                </div>
+              </div>
+              <label class="field">Name
+                <input name="name" maxlength="80" required autocomplete="name">
+              </label>
+              <label class="field">Email
+                <input id="settings-email" type="email" disabled>
+              </label>
+              <p class="field-hint">Changing your email is not available yet.</p>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit">Save changes</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="settings-card">
+            <div class="settings-card-head">
+              <h2>Appearance</h2>
+              <p>Choose how Taskflow looks. System follows your device's light or dark setting.</p>
+            </div>
+            <div class="theme-options" role="radiogroup" aria-label="Theme">
+              <label class="theme-option">
+                <input type="radio" name="theme" value="system">
+                <span class="theme-preview system" aria-hidden="true"><span class="tp-half tp-light"><i></i><b></b><b></b></span><span class="tp-half tp-dark"><i></i><b></b><b></b></span></span>
+                <span class="theme-name">System</span>
+              </label>
+              <label class="theme-option">
+                <input type="radio" name="theme" value="light">
+                <span class="theme-preview tp-light" aria-hidden="true"><i></i><b></b><b></b></span>
+                <span class="theme-name">Light</span>
+              </label>
+              <label class="theme-option">
+                <input type="radio" name="theme" value="dark">
+                <span class="theme-preview tp-dark" aria-hidden="true"><i></i><b></b><b></b></span>
+                <span class="theme-name">Dark</span>
+              </label>
+            </div>
+          </section>
+
+          <section class="settings-card">
+            <div class="settings-card-head">
+              <h2 id="password-title">Password</h2>
+              <p id="password-intro"></p>
+            </div>
+            <form id="password-form" class="settings-form">
+              <label class="field" id="current-password-field">Current password
+                <input type="password" name="current" autocomplete="current-password">
+              </label>
+              <label class="field">New password
+                <input type="password" name="password" minlength="8" required autocomplete="new-password">
+              </label>
+              <div class="meter" id="settings-meter"><span class="meter-bar"><i></i></span><span class="meter-label"></span></div>
+              <label class="field">Repeat new password
+                <input type="password" name="repeat" required autocomplete="new-password">
+              </label>
+              <p class="form-error" id="password-error"></p>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit" id="password-submit">Update password</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="settings-card">
+            <div class="settings-card-head">
+              <h2>Security</h2>
+              <p>How you sign in, and where.</p>
+            </div>
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Google sign-in</div>
+                <div class="setting-desc" id="google-desc"></div>
+              </div>
+              <span class="status-pill" id="google-status"></span>
+            </div>
+            <div class="setting-row">
+              <div>
+                <div class="setting-title">Other devices</div>
+                <div class="setting-desc">Lost a phone, or used a shared computer? Log out everywhere except here.</div>
+              </div>
+              <button class="btn btn-ghost" type="button" id="logout-others">Log out other devices</button>
+            </div>
+          </section>
+
+          <section class="settings-card danger-zone">
+            <div class="settings-card-head">
+              <h2>Delete account</h2>
+              <p>This deletes your account and every project you own, for everyone in them. Projects others own stay, without you. This can't be undone.</p>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-ghost danger" type="button" id="delete-account">Delete my account</button>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project -->
+    <section class="page" id="project-page" hidden>
+      <header class="project-header">
+        <span class="project-color" id="project-color"></span>
+        <h1 id="project-title" contenteditable="true" spellcheck="false"></h1>
+        <button class="icon-btn fav-btn" id="project-fav" type="button" title="Add to favorites" aria-label="Add to favorites" aria-pressed="false">☆</button>
+        <button class="status-btn" id="project-status" type="button" title="Project status"></button>
+        <button class="member-stack" id="member-stack" type="button" title="Members"></button>
+        <button class="btn btn-ghost" id="share-btn" type="button">
+          <svg class="btn-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8" cy="7" r="3"/><path d="M2.5 16a5.5 5.5 0 0 1 11 0M15 6v6M12 9h6"/></svg>
+          <span class="btn-label">Share</span>
+        </button>
+        <button class="icon-btn project-more" id="project-more" type="button" title="More project actions" aria-label="More project actions" aria-haspopup="menu">⋯</button>
+        <button class="icon-btn project-gear" id="project-settings-btn" type="button" title="Project settings" aria-label="Project settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="gear" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+        </button>
+      </header>
+
+      <div class="archived-banner" id="archived-banner" hidden>This project is archived. It is hidden from your sidebar and Home. <button class="btn-link" id="unarchive-btn" type="button">Unarchive</button></div>
+
+      <nav class="view-tabs">
+        <button class="view-tab" data-view="list">List</button>
+        <button class="view-tab" data-view="board">Board</button>
+        <button class="view-tab" data-view="calendar">Calendar</button>
+        <button class="view-tab" data-view="timeline">Timeline</button>
+        <button class="view-tab" data-view="dashboard">Dashboard</button>
+        <button class="view-tab" data-view="files">Files</button>
+      </nav>
+
+      <div class="filter-bar" id="filter-bar">
+        <div class="search-box">
+          <svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+          <input type="search" id="filter-search" placeholder="Search this project" autocomplete="off" aria-label="Search this project (press / to focus)">
+          <kbd class="search-kbd" aria-hidden="true">/</kbd>
+        </div>
+        <select id="filter-tag" title="Filter by tag">
+          <option value="">Tag</option>
+        </select>
+        <select id="filter-priority" title="Filter by priority">
+          <option value="">Priority</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+          <option value="none">No priority</option>
+        </select>
+        <select id="filter-due" title="Filter by due date">
+          <option value="">Due date</option>
+          <option value="overdue">Overdue</option>
+          <option value="today">Due today</option>
+          <option value="week">Next 7 days</option>
+          <option value="none">No due date</option>
+        </select>
+        <button class="btn-link" id="filter-clear" hidden>Clear filters</button>
+        <span class="filter-count" id="filter-count"></span>
+      </div>
+
+      <section class="board" id="board-view" hidden></section>
+
+      <section class="calendar" id="calendar-view" hidden></section>
+
+      <section class="timeline" id="timeline-view" hidden></section>
+
+      <section class="dashboard" id="dashboard-view" hidden></section>
+
+      <section class="dashboard files" id="files-view" hidden></section>
+
+      <section class="task-area" id="list-view">
+        <form id="new-task-form" class="new-task-form">
+          <input type="text" name="title" placeholder="+ Add task" maxlength="200" required>
+          <input type="date" name="due_date" title="Due date">
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+        <div class="task-table-head">
+          <span>Task name</span>
+          <span class="col-assignee" title="Assignee"></span>
+          <span class="col-priority">Priority</span>
+          <span>Due date</span>
+        </div>
+        <div class="task-list" id="task-list"></div>
+        <p class="empty" id="empty-state" hidden>No tasks yet. Add one above.</p>
+      </section>
+    </section>
+  </main>
+
+  <aside class="detail" id="detail" hidden>
+    <div class="detail-top">
+      <span class="detail-top-left">
+        <button class="btn btn-ghost" id="detail-complete">Mark complete</button>
+        <button class="btn btn-ghost" id="detail-undone" type="button" title="Open this task again">↺ Undone</button>
+      </span>
+      <span class="detail-top-right">
+        <button class="btn btn-ghost like-btn" id="detail-like" type="button" aria-pressed="false" title="Like"><span class="heart" aria-hidden="true">♥</span><span id="detail-like-count"></span></button>
+        <button class="icon-btn" id="detail-close" title="Close">&times;</button>
+      </span>
+    </div>
+    <a class="detail-project" id="detail-project" href="/app" hidden></a>
+    <textarea id="detail-title" class="detail-title" rows="1" maxlength="200"></textarea>
+    <label class="detail-field">Assignee
+      <span class="assignee-field">
+        <span id="assignee-avatar"></span>
+        <select id="detail-assignee">
+          <option value="">Unassigned</option>
+        </select>
+      </span>
+    </label>
+    <div class="detail-row">
+      <label class="detail-field">Start date <input type="date" id="detail-start"></label>
+      <label class="detail-field">Due date <input type="date" id="detail-due"></label>
+    </div>
+    <div class="detail-row">
+      <label class="detail-field">Priority
+        <select id="detail-priority">
+          <option value="">None</option>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+      <label class="detail-field" id="detail-section-field">Section
+        <select id="detail-section"></select>
+      </label>
+    </div>
+    <label class="detail-field">Repeat
+      <select id="detail-repeat">
+        <option value="">Does not repeat</option>
+        <option value="daily">Every day</option>
+        <option value="weekly">Every week</option>
+        <option value="monthly">Every month</option>
+      </select>
+    </label>
+    <div class="detail-field">
+      <span>Blocked by</span>
+      <ul class="dep-list" id="dep-list"></ul>
+      <select id="dep-add" aria-label="Add a task this one waits for"><option value="">+ Add a task this one waits for</option></select>
+      <p class="dep-blocking" id="dep-blocking"></p>
+    </div>
+    <div class="detail-field">
+      <span>Tags</span>
+      <div class="tag-box" id="detail-tags"></div>
+    </div>
+    <label class="detail-field detail-notes">Description
+      <textarea id="detail-notes" rows="6" placeholder="Add more detail to this task..."></textarea>
+    </label>
+    <div class="detail-field">
+      <span>Attachments <span class="subtask-progress" id="attachment-total"></span></span>
+      <ul class="attachment-list" id="attachment-list"></ul>
+      <label class="drop-zone">
+        <input type="file" id="attachment-input" multiple>
+        <svg class="drop-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M13.5 6.5l-6 6a1.75 1.75 0 0 0 2.5 2.5l6.25-6.25a3.5 3.5 0 0 0-5-5L4.75 10.25a5.25 5.25 0 0 0 7.5 7.5L17 13"/></svg>
+        <span class="drop-text"><strong>Drop files here</strong>, paste a screenshot, or click to browse</span>
+        <span class="drop-hint">Max 50 MB</span>
+      </label>
+    </div>
+    <div class="detail-field">
+      <span>Subtasks <span class="subtask-progress" id="subtask-progress"></span></span>
+      <ul class="subtask-list" id="subtask-list"></ul>
+      <form id="new-subtask-form" class="new-subtask-form">
+        <input name="title" placeholder="+ Add subtask" maxlength="200" autocomplete="off">
+      </form>
+    </div>
+    <div class="detail-field">
+      <span>Comments <span class="subtask-progress" id="comment-total"></span></span>
+      <ul class="comment-list" id="comment-list"></ul>
+      <form id="comment-form" class="comment-form">
+        <textarea name="body" rows="2" maxlength="2000" placeholder="Write a comment... Type @name to mention someone" aria-label="Write a comment"></textarea>
+        <div class="comment-actions">
+          <span class="comment-hint"><kbd>Ctrl</kbd> + <kbd>Enter</kbd> to send</span>
+          <button class="btn btn-primary" type="submit">Comment</button>
+        </div>
+      </form>
+    </div>
+    <button class="btn btn-ghost danger" id="detail-delete">Delete task</button>
+  </aside>
+  </div>
+
+  <!-- Ctrl+K search across all projects -->
+  <div class="palette-backdrop" id="palette" hidden>
+    <div class="palette" role="dialog" aria-modal="true" aria-label="Search">
+      <div class="palette-input">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg>
+        <input id="palette-input" type="text" placeholder="Search tasks and projects..." autocomplete="off"
+               role="combobox" aria-expanded="true" aria-controls="palette-results">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="palette-results" id="palette-results" role="listbox"></div>
+      <div class="palette-foot">
+        <span><kbd>&uarr;</kbd><kbd>&darr;</kbd> to move</span>
+        <span><kbd>Enter</kbd> to open</span>
+        <span><kbd>Esc</kbd> to close</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/board.js"></script>
+  <script src="/js/list.js"></script>
+  <script src="/js/calendar.js"></script>
+  <script src="/js/timeline.js"></script>
+  <script src="/js/charts.js"></script>
+  <script src="/js/reports.js"></script>
+  <script src="/js/task-extras.js"></script>
+  <script src="/js/filters.js"></script>
+  <script src="/js/topbar.js"></script>
+  <script src="/js/home.js"></script>
+  <script src="/js/projects.js"></script>
+  <script src="/js/workspace.js"></script>
+  <script src="/js/extras.js"></script>
+  <script src="/js/mytasks.js"></script>
+  <script src="/js/files.js"></script>
+  <script src="/js/inbox.js"></script>
+  <script src="/js/search.js"></script>
+  <script src="/js/team.js"></script>
+  <script src="/js/attachments.js"></script>
+  <script src="/js/settings.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

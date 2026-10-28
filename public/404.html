@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found | Taskflow</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#050505">
+  <!-- Apply the saved theme before the first paint, so the page never flashes the wrong colors -->
+  <script>(function(){var p="dark";try{p=localStorage.getItem("theme")||"dark"}catch(e){}var t=p==="system"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):(p==="light"?"light":"dark");document.documentElement.dataset.theme=t;})();</script>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="site">
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+      <div class="nav-menu">
+        <nav class="nav-links">
+          <a href="/features">Features</a>
+        </nav>
+        <div class="nav-actions">
+          <a class="btn btn-ghost" href="/login" data-guest>Log in</a>
+          <a class="btn btn-primary" href="/signup" data-guest>Get started</a>
+          <a class="btn btn-primary" href="/app" data-member hidden>Open app</a>
+        </div>
+      </div>
+      <button class="icon-btn nav-toggle" id="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main class="hero not-found">
+    <span class="glass-pill"><span class="dot"></span> Error 404</span>
+    <div class="not-found-code" aria-hidden="true">404</div>
+    <h1><span class="shine">This page doesn't exist</span></h1>
+    <p class="lead">The link might be broken, or the page may have moved. Your tasks are safe.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary btn-lg" href="/">Back to home <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="btn btn-lg" href="/app">Open app</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> Taskflow</span>
+        <span>Made by Abdul Raheem</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/site.js"></script>
+</body>
+</html>

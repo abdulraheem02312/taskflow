@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in | Taskflow</title>
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta name="theme-color" content="#050505">
+  <!-- Apply the saved theme before the first paint, so the page never flashes the wrong colors -->
+  <script>(function(){var p="dark";try{p=localStorage.getItem("theme")||"dark"}catch(e){}var t=p==="system"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):(p==="light"?"light":"dark");document.documentElement.dataset.theme=t;})();</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-card">
+    <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+    <h1>Welcome back</h1>
+    <div class="google-signin" id="google-signin" hidden>
+      <div class="google-button" id="google-button"></div>
+      <div class="divider"><span>or</span></div>
+    </div>
+    <form id="auth-form" data-endpoint="/api/login">
+      <label>Email <input type="email" name="email" required autocomplete="email"></label>
+      <label>
+        <span class="label-row">Password <a class="forgot-link" href="/forgot-password">Forgot password?</a></span>
+        <input type="password" name="password" required autocomplete="current-password">
+      </label>
+      <p class="form-error" id="form-error"></p>
+      <button type="submit" class="btn btn-primary">Log in</button>
+    </form>
+    <p class="auth-switch">Don't have an account? <a href="/signup">Sign up</a></p>
+    <a class="auth-back" href="/">Back to home</a>
+  </main>
+  <script src="/js/theme.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>

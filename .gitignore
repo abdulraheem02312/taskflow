@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Secrets
+.env
+.env.*
+
+# Local database, backups and uploaded files
+data/
+
+# Personal notes for Claude
+CLAUDE.md
+.claude/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.log

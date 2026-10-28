@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Taskflow | Work, organized in black and white</title>
+  <meta name="description" content="Taskflow keeps your projects, tasks and deadlines in one calm place. List, Board and Calendar views, subtasks, tags, priority and search.">
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Taskflow">
+  <meta property="og:title" content="Taskflow | Work, organized in black and white">
+  <meta property="og:description" content="Taskflow keeps your projects, tasks and deadlines in one calm place. List, Board and Calendar views, subtasks, tags, priority and search.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#050505">
+  <!-- Apply the saved theme before the first paint, so the page never flashes the wrong colors -->
+  <script>(function(){var p="dark";try{p=localStorage.getItem("theme")||"dark"}catch(e){}var t=p==="system"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):(p==="light"?"light":"dark");document.documentElement.dataset.theme=t;})();</script>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="site">
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+      <div class="nav-menu">
+        <nav class="nav-links">
+          <a href="/features">Features</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="icon-btn theme-toggle" type="button" aria-label="Switch between light and dark" title="Light / dark"><svg class="ti-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.5"/><path d="M10 2.5v1.8M10 15.7v1.8M2.5 10h1.8M15.7 10h1.8M4.7 4.7l1.3 1.3M14 14l1.3 1.3M4.7 15.3L6 14M14 6l1.3-1.3"/></svg><svg class="ti-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.5A6.5 6.5 0 0 1 7.5 4a6.5 6.5 0 1 0 8.5 8.5z"/></svg></button>
+          <a class="btn btn-ghost" href="/login" data-guest>Log in</a>
+          <a class="btn btn-primary" href="/signup" data-guest>Get started</a>
+          <a class="btn btn-primary" href="/app" data-member hidden>Open app</a>
+        </div>
+      </div>
+      <button class="icon-btn nav-toggle" id="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <a class="glass-pill" href="/features"><span class="dot"></span> New: Timeline, Portfolios, Goals and Rules</a>
+      <h1><span class="shine">Work, organized.</span><br><span class="dim">In black and white.</span></h1>
+      <p class="lead">Taskflow keeps your projects, tasks and deadlines in one calm place. Plan in a list, move work across a board, and see every deadline on a calendar.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary btn-lg" href="/signup" data-guest>Get started free <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-primary btn-lg" href="/app" data-member hidden>Open your workspace <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        <a class="btn btn-lg" href="/features">See all features</a>
+      </div>
+      <p class="hero-note">Free to use. Sign up with email or Google in seconds.</p>
+
+      <!-- A static copy of the app, built with the app's own styles -->
+      <div class="preview reveal" aria-hidden="true">
+        <div class="preview-bar"><i></i><i></i><i></i></div>
+        <div class="preview-body">
+          <aside class="preview-side">
+            <div class="logo"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</div>
+            <div class="sidebar-heading"><span>Projects</span></div>
+            <div class="project-item active"><span class="project-dot" style="background:#a78bfa"></span><span class="project-name">Website launch</span><span class="project-count">4</span></div>
+            <div class="project-item"><span class="project-dot" style="background:#60a5fa"></span><span class="project-name">School exams</span><span class="project-count">7</span></div>
+            <div class="project-item"><span class="project-dot" style="background:#fbbf24"></span><span class="project-name">Side projects</span><span class="project-count">2</span></div>
+          </aside>
+          <div class="preview-main">
+            <div class="preview-title"><span class="project-color"></span> Website launch</div>
+            <div class="mock-tabs"><span>List</span><span class="on">Board</span><span>Calendar</span></div>
+            <div class="mock-columns">
+              <div class="mock-col">
+                <h4><span class="column-dot" style="--c:#9ca3af"></span>To do</h4>
+                <div class="card">
+                  <div class="card-top"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="card-title">Design landing page</span></div>
+                  <div class="card-meta"><span class="badge prio-high">High</span><span class="tag-pill" style="--dot:#f472b6;background:#f472b624;border-color:#f472b655">Design</span><span class="card-due">Today</span></div>
+                </div>
+                <div class="card">
+                  <div class="card-top"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="card-title">Write launch email</span></div>
+                  <div class="card-meta"><span class="tag-pill" style="--dot:#2dd4bf;background:#2dd4bf24;border-color:#2dd4bf55">Marketing</span><span class="subtask-count"><svg viewBox="0 0 16 16"><path d="M5 4h8M5 8h8M5 12h8M2 4h.01M2 8h.01M2 12h.01"/></svg>1/3</span></div>
+                </div>
+              </div>
+              <div class="mock-col">
+                <h4><span class="column-dot" style="--c:#fbbf24"></span>Doing</h4>
+                <div class="card">
+                  <div class="card-top"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="card-title">Add Google sign-in</span></div>
+                  <div class="card-meta"><span class="badge prio-medium">Medium</span><span class="tag-pill" style="--dot:#60a5fa;background:#60a5fa24;border-color:#60a5fa55">Backend</span><span class="card-due">Tomorrow</span></div>
+                </div>
+                <div class="card">
+                  <div class="card-top"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="card-title">Fix calendar on phones</span></div>
+                  <div class="card-meta"><span class="badge prio-low">Low</span></div>
+                </div>
+              </div>
+              <div class="mock-col">
+                <h4><span class="column-dot" style="--c:#4ade80"></span>Done</h4>
+                <div class="card done">
+                  <div class="card-top"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="card-title">Set up the project</span></div>
+                </div>
+                <div class="card done">
+                  <div class="card-top"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="card-title">Pick a black and white theme</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three views -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Three views</div>
+          <h2>See your work the way you think</h2>
+          <p>Switch between a list, a board and a calendar in one click. Same tasks, three angles.</p>
+        </div>
+        <div class="grid-3">
+          <article class="glass-card reveal">
+            <div class="mini" data-list-demo>
+              <div class="mini-row"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="bar w70"></span></div>
+              <div class="mini-row"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="bar w55"></span></div>
+              <div class="mini-row"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="bar w40"></span></div>
+              <div class="mini-row"><span class="check"><svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7"/></svg></span><span class="bar w55"></span></div>
+            </div>
+            <h3>List</h3>
+            <p>A clean table of every task with its priority and due date. Type a name, press Enter, keep going.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="mini mini-demo">
+              <svg class="mini-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6 1.6L9.6 19z"/></svg>
+              <div class="mini-cols" data-board-demo data-max="3">
+                <div class="mini-col"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+                <div class="mini-col"><div class="mini-card"></div><div class="mini-card"></div></div>
+                <div class="mini-col"><div class="mini-card"></div></div>
+              </div>
+            </div>
+            <h3>Board</h3>
+            <p>Drag cards between columns like To do, Doing and Done. Add, rename or remove columns any time.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="mini mini-demo">
+              <svg class="mini-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6 1.6L9.6 19z"/></svg>
+              <div class="mini-cal" data-cal-demo>
+                <span></span><span class="has"></span><span></span><span></span><span class="has"></span><span></span><span></span>
+                <span></span><span></span><span class="today"></span><span></span><span></span><span class="has purple"></span><span></span>
+                <span class="has blue"></span><span></span><span></span><span class="has blue"></span><span></span><span></span><span></span>
+                <span></span><span></span><span></span><span></span><span class="has"></span><span></span><span></span>
+              </div>
+            </div>
+            <h3>Calendar</h3>
+            <p>Every task on its due date. Drag a task to another day to reschedule it in a second.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Everything you need</div>
+          <h2>Small tools that add up</h2>
+          <p>No clutter. Just the pieces that help you finish things.</p>
+        </div>
+        <div class="grid-3">
+          <article class="glass-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5"/></svg></div>
+            <h3>Subtasks</h3>
+            <p>Break big tasks into small steps and watch the progress count go up.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9-9-9z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg></div>
+            <h3>Tags</h3>
+            <p>Label tasks like Frontend or Urgent, then filter by them when you need focus.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg></div>
+            <h3>Priority</h3>
+            <p>Mark what matters with High, Medium or Low, and see it at a glance on every task.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></div>
+            <h3>Search and filters</h3>
+            <p>Find any task by name or description. Press / anywhere and start typing.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
+            <h3>Made for phones too</h3>
+            <p>Every view works on small screens, including touch drag and drop on the board.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="feature-icon"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+            <h3>Secure sign-in</h3>
+            <p>Continue with Google or use email. Passwords are never stored in plain text.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">How it works</div>
+          <h2>From messy to done in three steps</h2>
+        </div>
+        <div class="grid-3 steps">
+          <article class="glass-card reveal">
+            <div class="step-num">01</div>
+            <h3>Create a project</h3>
+            <p>One project for each goal: a website, an exam, a trip. Give it a name and you are ready.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="step-num">02</div>
+            <h3>Add your tasks</h3>
+            <p>Dump everything in. Add due dates, tags, priority and subtasks when they help.</p>
+          </article>
+          <article class="glass-card reveal">
+            <div class="step-num">03</div>
+            <h3>Move them to Done</h3>
+            <p>Drag cards across the board or tick them off in the list. Nothing feels better.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Keyboard shortcuts -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Built for speed</div>
+          <h2>Your hands never leave the keyboard</h2>
+          <p>The things you do a hundred times a day take one key.</p>
+        </div>
+        <div class="shortcuts">
+          <article class="glass-card shortcut reveal">
+            <div class="keys"><kbd>/</kbd></div>
+            <h3>Search</h3>
+            <p>Jump to search from anywhere.</p>
+          </article>
+          <article class="glass-card shortcut reveal">
+            <div class="keys"><kbd>Enter</kbd></div>
+            <h3>Add task</h3>
+            <p>Save it and type the next one.</p>
+          </article>
+          <article class="glass-card shortcut reveal">
+            <div class="keys"><kbd>Esc</kbd></div>
+            <h3>Close</h3>
+            <p>Close a panel or clear a search.</p>
+          </article>
+          <article class="glass-card shortcut reveal">
+            <div class="keys"><kbd>Tab</kbd></div>
+            <h3>Move around</h3>
+            <p>Every control works without a mouse.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to action -->
+    <section class="section-tight">
+      <div class="container">
+        <div class="glass-card cta-band reveal">
+          <div class="eyebrow">Start today</div>
+          <h2><span class="shine">Clear your head. Start with one task.</span></h2>
+          <p class="lead">Free to use. Sign up with email or Google and your first project is waiting.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="/signup" data-guest>Create your free account <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a class="btn btn-primary btn-lg" href="/app" data-member hidden>Open your workspace <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+          <p>A calm, black and white place to plan projects and get work done.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="/features">Features</a>
+          <a href="/app">Open app</a>
+        </div>
+        <div class="footer-col">
+          <h5>Account</h5>
+          <a href="/login">Log in</a>
+          <a href="/signup">Sign up</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> Taskflow</span>
+        <span>Made by Abdul Raheem</span>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">Taskflow</div>
+    </div>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/site.js"></script>
+</body>
+</html>

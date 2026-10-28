@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Features | Taskflow</title>
+  <meta name="description" content="List, Board and Calendar views, subtasks, tags, priority, search and filters, and secure Google sign-in.">
+  <link rel="icon" href="/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Taskflow">
+  <meta property="og:title" content="Features | Taskflow">
+  <meta property="og:description" content="List, Board and Calendar views, subtasks, tags, priority, search and filters, and secure Google sign-in.">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#050505">
+  <!-- Apply the saved theme before the first paint, so the page never flashes the wrong colors -->
+  <script>(function(){var p="dark";try{p=localStorage.getItem("theme")||"dark"}catch(e){}var t=p==="system"?(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark"):(p==="light"?"light":"dark");document.documentElement.dataset.theme=t;})();</script>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/site.css">
+</head>
+<body class="site">
+  <header class="site-nav" id="site-nav">
+    <div class="nav-inner">
+      <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+      <div class="nav-menu">
+        <nav class="nav-links">
+          <a href="/features" class="active">Features</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="icon-btn theme-toggle" type="button" aria-label="Switch between light and dark" title="Light / dark"><svg class="ti-sun" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.5"/><path d="M10 2.5v1.8M10 15.7v1.8M2.5 10h1.8M15.7 10h1.8M4.7 4.7l1.3 1.3M14 14l1.3 1.3M4.7 15.3L6 14M14 6l1.3-1.3"/></svg><svg class="ti-moon" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.5A6.5 6.5 0 0 1 7.5 4a6.5 6.5 0 1 0 8.5 8.5z"/></svg></button>
+          <a class="btn btn-ghost" href="/login" data-guest>Log in</a>
+          <a class="btn btn-primary" href="/signup" data-guest>Get started</a>
+          <a class="btn btn-primary" href="/app" data-member hidden>Open app</a>
+        </div>
+      </div>
+      <button class="icon-btn nav-toggle" id="nav-toggle" aria-label="Open menu">&#9776;</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="eyebrow">Features</div>
+      <h1><span class="shine">Everything in one calm place</span></h1>
+      <p class="lead">Three ways to see your work, the details that keep it clear, and a search that finds anything.</p>
+    </section>
+
+    <section class="container">
+      <div class="feature-row reveal">
+        <div>
+          <div class="eyebrow">List view</div>
+          <h2>Every task, one clean table</h2>
+          <p>The fastest way to plan. Type a task, press Enter, and the box is ready for the next one.</p>
+          <ul class="ticks">
+            <li>Priority and due date columns</li>
+            <li>Overdue tasks stand out on their own</li>
+            <li>Completed tasks move to the bottom</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="mini">
+            <div class="mini-row"><span class="check"></span><span class="bar w70"></span></div>
+            <div class="mini-row"><span class="check"></span><span class="bar w55"></span></div>
+            <div class="mini-row"><span class="check"></span><span class="bar w40"></span></div>
+            <div class="mini-row"><span class="check"></span><span class="bar w55"></span></div>
+            <div class="mini-row"><span class="check"></span><span class="bar w30"></span></div>
+            <div class="mini-row"><span class="check"></span><span class="bar w70"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="eyebrow">Board view</div>
+          <h2>Move work forward, card by card</h2>
+          <p>Drag tasks between columns to show where they stand. Columns are yours to shape.</p>
+          <ul class="ticks">
+            <li>Drag and drop with a mouse or a finger</li>
+            <li>Add, rename and delete columns</li>
+            <li>Deleting a column never deletes its tasks</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="mini mini-demo">
+            <svg class="mini-cursor" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l14 8-6 1.6L9.6 19z"/></svg>
+            <div class="mini-cols" data-board-demo>
+              <div class="mini-col"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+              <div class="mini-col"><div class="mini-card"></div><div class="mini-card"></div></div>
+              <div class="mini-col"><div class="mini-card"></div><div class="mini-card"></div><div class="mini-card"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="eyebrow">Calendar view</div>
+          <h2>Deadlines you can actually see</h2>
+          <p>Each task sits on its due date. Plan a month at a glance and reschedule by dragging.</p>
+          <ul class="ticks">
+            <li>Add a task straight onto any day</li>
+            <li>Drag a task to a new date</li>
+            <li>On phones, tap a day to see its tasks</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="mini">
+            <div class="mini-cal">
+              <span></span><span class="has"></span><span></span><span></span><span class="has"></span><span></span><span></span>
+              <span></span><span></span><span class="has"></span><span></span><span></span><span class="has"></span><span></span>
+              <span class="has"></span><span></span><span></span><span class="today"></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span class="has"></span><span></span><span class="has"></span>
+              <span></span><span class="has"></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="eyebrow">Task details</div>
+          <h2>Subtasks, tags and priority</h2>
+          <p>Open any task to add the details that make it clear: smaller steps, labels and how urgent it is.</p>
+          <ul class="ticks">
+            <li>Subtasks with a live progress count</li>
+            <li>Create tags as you type</li>
+            <li>High, Medium and Low priority</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="mini" style="display:grid;gap:12px;align-content:start">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span class="badge prio-high">High</span>
+              <span class="tag-pill" style="--dot:#f472b6;background:#f472b624;border-color:#f472b655">Design</span>
+              <span class="tag-pill" style="--dot:#fb923c;background:#fb923c24;border-color:#fb923c55">Urgent</span>
+            </div>
+            <div class="mini-row" style="border:none"><span class="check" style="background:#4ade80;border-color:#4ade80"></span><span class="bar w55"></span></div>
+            <div class="mini-row" style="border:none"><span class="check" style="background:#4ade80;border-color:#4ade80"></span><span class="bar w40"></span></div>
+            <div class="mini-row" style="border:none"><span class="check"></span><span class="bar w70"></span></div>
+            <span class="subtask-count all-done">2 of 3 subtasks done</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="eyebrow">Search and filters</div>
+          <h2>Find anything in a second</h2>
+          <p>Search names and descriptions, then narrow down by tag, priority or due date. Works in every view.</p>
+          <ul class="ticks">
+            <li>Press / anywhere to start searching</li>
+            <li>Overdue, due today and next 7 days</li>
+            <li>Matches are highlighted as you type</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="mini" style="display:grid;gap:12px;align-content:start">
+            <div class="search-box" style="max-width:none"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5"/><path d="M10.5 10.5L14 14"/></svg><input type="text" value="login" tabindex="-1" readonly aria-hidden="true"></div>
+            <div class="mini-row"><span class="check"></span><span>Fix <mark>login</mark> bug</span></div>
+            <div class="mini-row"><span class="check"></span><span><mark>Login</mark> page polish</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-row reveal">
+        <div>
+          <div class="eyebrow">Your account</div>
+          <h2>Sign in your way, safely</h2>
+          <p>Use Continue with Google, or an email and password. Your work stays private to your account.</p>
+          <ul class="ticks">
+            <li>Google sign-in, checked on the server</li>
+            <li>Passwords hashed, never stored as text</li>
+            <li>You stay logged in for 7 days</li>
+          </ul>
+        </div>
+        <div class="feature-visual">
+          <div class="mini" style="display:grid;place-items:center">
+            <span class="btn" style="border-radius:999px;padding:10px 22px">Continue with Google</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Coming next</div>
+          <h2>What we are building now</h2>
+          <p>Taskflow grows step by step. These are on the way.</p>
+        </div>
+        <div class="glass-card reveal" style="max-width:640px;margin:0 auto">
+          <ul class="ticks soon" style="margin:0">
+            <li>My Tasks: everything due, from every project, in one list</li>
+            <li>Team members, invites and assigning tasks to people</li>
+            <li>Comments on tasks and an inbox for updates</li>
+            <li>Profile, settings and password reset</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-tight">
+      <div class="container">
+        <div class="glass-card cta-band reveal">
+          <h2><span class="shine">Try it with your next project</span></h2>
+          <p class="lead">Free to use. Your first project is ready the moment you sign up.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="/signup" data-guest>Get started free <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+            <a class="btn btn-primary btn-lg" href="/app" data-member hidden>Open your workspace <svg class="arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="logo" href="/"><img class="logo-mark" src="/img/logo.png" alt="" width="26" height="26"> Taskflow</a>
+          <p>A calm, black and white place to plan projects and get work done.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Product</h5>
+          <a href="/features">Features</a>
+          <a href="/app">Open app</a>
+        </div>
+        <div class="footer-col">
+          <h5>Account</h5>
+          <a href="/login">Log in</a>
+          <a href="/signup">Sign up</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> Taskflow</span>
+        <span>Made by Abdul Raheem</span>
+      </div>
+      <div class="footer-wordmark" aria-hidden="true">Taskflow</div>
+    </div>
+  </footer>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/site.js"></script>
+</body>
+</html>
